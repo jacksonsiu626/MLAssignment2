@@ -12,12 +12,12 @@ object Main {
   def main(args: Array[String]): Unit = {
     // We need to use spark-submit command to run this program
     val conf = new SparkConf().setAppName("COMP4434 Assignment 2");
-    val sc = new SparkContext(conf);
+    val sc = new SparkContext("local","COMP4434 Assignment 2");
 
     
     // File names
-    val trainingFile  = "sample.txt"
-    val testFile  = "test.txt"
+    val trainingFile  = "dat/sample.txt"
+    val testFile  = "dat/test.txt"
       
     // Load raw data
     val rawData = parseFile(sc, trainingFile)

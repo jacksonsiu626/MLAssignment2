@@ -17,8 +17,7 @@ object ModelSelector {
     for(model <- candidates){
       // ************************************
       // ** Fill in the body
-      
-      
+        model.extendData(cvData)
       //                                   **
       // ************************************
     }

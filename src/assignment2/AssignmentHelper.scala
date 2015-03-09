@@ -21,7 +21,21 @@ object AssignmentHelper {
     }
     // ************************************
     // ** Create extend functions for H1~H3
-  
+    def extend1 (inVec: Vector): Vector = {
+      val x1 = inVec.toArray(0)
+      val x2 = inVec.toArray(1)
+      Vectors.dense(x1, x2, x1*x1, x2*x2, x1*x2)
+    }
+    def extend2 (inVec: Vector): Vector = {
+      val x1 = inVec.toArray(0)
+      val x2 = inVec.toArray(1)
+      Vectors.dense(x1, x2, x1*x1, x2*x2, x1*x1*x1, x2*x2*x2, x1*x2*x2, x1*x1*x2)
+    }
+    def extend3 (inVec: Vector): Vector = {
+      val x1 = inVec.toArray(0)
+      val x2 = inVec.toArray(1)
+      Vectors.dense(x1, x2, x1*x1, x2*x2, x1*x1*x1, x2*x2*x2, x1*x1*x1*x1, x2*x2*x2*x2, x1*x1*x2*x2)
+    }
     //                                   **
     // ************************************
     
@@ -31,6 +45,9 @@ object AssignmentHelper {
     // ************************************
     // ** Create models for H1~H3
   
+    val model1 = new LRWithExtendedFeatures(extend1, "H1")
+    val model2 = new LRWithExtendedFeatures(extend2, "H2")
+    val model3 = new LRWithExtendedFeatures(extend3, "H3")
     //                                   **
     // ************************************
     
@@ -40,6 +57,9 @@ object AssignmentHelper {
     // ************************************
     // ** Train models for H1~H3
   
+    model1.extendAndTrain(trainingData)
+    model2.extendAndTrain(trainingData)
+    model3.extendAndTrain(trainingData)
     //                                   **
     // ************************************
     
@@ -47,7 +67,7 @@ object AssignmentHelper {
     // ************************************
     // ** Prepare the candidate array
     // ** Add more candidates as necessary
-     val candidates: Array[LRWithExtendedFeatures] = Array(model0)   
+     val candidates: Array[LRWithExtendedFeatures] = Array(model0,model1,model2,model3)   
     //                                   **
     // ************************************
 
