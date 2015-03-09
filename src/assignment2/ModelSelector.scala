@@ -17,7 +17,17 @@ object ModelSelector {
     for(model <- candidates){
       // ************************************
       // ** Fill in the body
-        model.extendData(cvData)
+      val cvTestLabel = cvData.map { 
+        point => val score = model.extendAndPredict(point.features)
+          (score, point.label)
+      }
+      val metrics = new BinaryClassificationMetrics(cvTestLabel)
+      val tempAuROC = metrics.areaUnderROC()
+      if(tempAuROC > bestAuROC){
+        bestAuROC=tempAuROC
+        bestModel=model
+      }
+        
       //                                   **
       // ************************************
     }
